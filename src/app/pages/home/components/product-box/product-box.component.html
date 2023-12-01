@@ -1,15 +1,15 @@
-<mat-card [ngClass]="{'text-center': !fullWidthMode}">
+<mat-card *ngIf="product" [ngClass]="{'text-center': !fullWidthMode}">
     <div class="p-3" [ngClass]="{'flex': fullWidthMode}">
-        <img class="mb-2 mx-auto h-[200px]" [ngClass]="{'h-[200px]': !fullWidthMode, 'h-[320px]': fullWidthMode}" src="https://via.placeholder.com/150" alt="product-box"/>
+        <img class="mb-2 mx-auto h-[200px]" [ngClass]="{'h-[200px]': !fullWidthMode, 'h-[320px]': fullWidthMode}" [src]="product.image" alt="product-box"/>
         <div class="w-full" [ngClass]="{'px-8 flex flex-col justify-between': fullWidthMode}">
             <div>
-                <h5>Shoes</h5>
-                <p class="truncate  hover:whitespace-normal">Snickers</p>
-                <p *ngIf="fullWidthMode">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam sit optio, rem autem dolor sunt exercitationem repudiandae molestiae nam dicta recusandae in officiis repellendus explicabo impedit aliquam voluptate libero voluptates necessitatibus at similique maxime odit molestias. Est placeat temporibus explicabo eos voluptate suscipit cupiditate aliquid cum sapiente nisi pariatur reprehenderit laudantium voluptatem, magni adipisci quidem minima alias architecto! Corporis, commodi in vel optio hic, velit a dolore rerum cumque error sapiente perspiciatis ipsum quibusdam distinctio modi similique nulla minus, cum quas facere laudantium ut! Dolore rem similique vel recusandae eos assumenda. Nostrum incidunt, sit ab veritatis explicabo adipisci ipsa corrupti, ipsam deserunt pariatur non sapiente eveniet minima, quaerat consectetur assumenda cum neque aperiam. Illo animi at aperiam dicta provident, fugiat architecto doloribus quo, sint quaerat excepturi debitis vitae soluta ipsam eveniet adipisci vero iusto quam. Inventore id voluptatem ad incidunt nobis quas vel quos nam, saepe neque perferendis dignissimos est!</p>
+                <h5>{{product.category}}</h5>
+                <p class="truncate  hover:whitespace-normal">{{product.title}}</p>
+                <p *ngIf="fullWidthMode">{{product.description}}</p>
             </div>
             <div class="flex justify-between px-5">
-                <span class=" text-red-400">{{ '150' | currency }}</span>
-                <button>
+                <span class=" text-red-400">{{ product.price | currency }}</span>
+                <button (click)="onAddToCart()">
                     <mat-icon class="text-gray-500">
                         shopping_cart
                     </mat-icon>

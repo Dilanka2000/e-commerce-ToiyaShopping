@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -15,6 +15,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
+import { Cart } from './models/cart.model';
+import { CartService } from './services/cart.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -35,11 +38,20 @@ import { HomeComponent } from './pages/home/home.component';
     MatBadgeModule,
     MatSnackBarModule,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    HttpClientModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  title = 'toiya-shop';
+export class AppComponent implements OnInit {
+  cart: Cart = { items: [] };
+
+  constructor(private cartService: CartService) { }
+  
+  ngOnInit() {
+    this.cartService.cart.subscribe((_cart) => {
+      this.cart = _cart;
+    })
+  }
 }
